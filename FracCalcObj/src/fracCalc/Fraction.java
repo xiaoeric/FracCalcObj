@@ -10,22 +10,20 @@ public class Fraction {
 		this.denom = denom;
 	}
 	public String toString() {
-		String result = "";
-		if(whole != 0) {
-			result += whole;
-			if(numer != 0) {
-				result += numer;
-				if(denom != 1)
-					result += "/" + denom;
-			}
-		} else if(numer != 0) {
-			result += numer;
-			if(denom != 1)
-				result += "/" + denom;
-		} else {
-			result += "0";
-		}
-		return result;
+		String input = whole + "_" + numer + "/" + denom;
+
+    	if (input.startsWith("0_"))
+        	input = input.substring(2);
+    	
+    	if (input.indexOf("_0/") > 0)
+    		input = input.substring(0, input.indexOf("_0/"));
+    	else if (input.indexOf("0/") == 0)
+    		input = "0";
+    	
+    	if (input.endsWith("/1"))
+    		input = input.substring(0, input.length() - 2);
+    	
+    	return input;
 	}
 	public Fraction add(Fraction frac) {
 		int resultNumer;
