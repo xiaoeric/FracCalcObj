@@ -1,9 +1,9 @@
 package fracCalc;
 
 public class Fraction {
-	int whole;
-	int numer;
-	int denom;
+	private int whole;
+	private int numer;
+	private int denom;
 	public Fraction(int whole, int numer, int denom) {
 		this.whole = whole;
 		this.numer = numer;
