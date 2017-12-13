@@ -101,60 +101,38 @@ public class FracCalc {
     //      e.g. return ==> "1_1/4"
     public static String produceAnswer(String input)
     { 
-        // TODO: Implement this function to produce the solution to the input
+    	//Splits user input into array
         String[] terms = input.split(" ");
-        String first = terms[0];
+        String firstString = terms[0];
         String operator = terms[1];
-        String second = terms[2];
+        String secondString = terms[2];
         
+        /*
+         * Activates code to handle multiple operations
+         * later on if multiple operations exist
+         */
         boolean multiOp = false;
         if (terms.length > 3)
         	multiOp = true;
         
-        int firstWhole = 0;
-        int firstNumer = 0;
-        int firstDenom = 1;
-        if (first.indexOf('_') >= 0)
-        {
-        	firstWhole = Integer.parseInt(first.substring(0, first.indexOf('_')));
-        	firstNumer = Integer.parseInt(first.substring(first.indexOf('_') + 1, first.indexOf('/')));
-        	firstDenom = Integer.parseInt(first.substring(first.indexOf('/') + 1));
-        }
-        else if (first.indexOf('/') >= 0)
-        {
-        	firstNumer = Integer.parseInt(first.substring(0, first.indexOf('/')));
-        	firstDenom = Integer.parseInt(first.substring(first.indexOf('/') + 1));
-        }
-        else
-        {
-        	firstWhole = Integer.parseInt(first);
-        }
+        //Receives output from parse()
+        Fraction firstFrac = parse(firstString);
+        Fraction secondFrac = parse(secondString);
         
-        int secondWhole = 0;
-        int secondNumer = 0;
-        int secondDenom = 1;
-        if (second.indexOf('_') >= 0)
-        {
-        	secondWhole = Integer.parseInt(second.substring(0, second.indexOf('_')));
-        	secondNumer = Integer.parseInt(second.substring(second.indexOf('_') + 1, second.indexOf('/')));
-        	secondDenom = Integer.parseInt(second.substring(second.indexOf('/') + 1));
-        }
-        else if (second.indexOf('/') >= 0)
-        {
-        	secondNumer = Integer.parseInt(second.substring(0, second.indexOf('/')));
-        	secondDenom = Integer.parseInt(second.substring(second.indexOf('/') + 1));
-        }
-        else
-        {
-        	secondWhole = Integer.parseInt(second);
-        }
-        
-        if (firstDenom == 0 || secondDenom == 0)
+        /*
+         * Returns an error if the input contains a fraction
+         * with a denominator of 0
+         */
+        if (firstFrac.getDenom() == 0 || secondFrac.getDenom() == 0)
         	return "Umm... why are you trying to divide by zero...?";
         
-        Fraction firstFrac = new Fraction(firstWhole, firstNumer, firstDenom);
-        Fraction secondFrac = new Fraction(secondWhole, secondNumer, secondDenom);
-        Fraction resultFrac;
+        //Initialize array to contain result of calculation
+        Fraction resultFrac = new Fraction(0, 0, 1);
+        
+        /*
+         * Switch statement checks operator and performs
+         * corresponding calculations
+         */
         switch (operator)
         {
         	case "+":
@@ -182,6 +160,44 @@ public class FracCalc {
     		result = produceAnswer(temp);
         }
         return result;
+    }
+    
+    public static Fraction parse(String input)
+    {
+    	//Initializes with default values
+    	int whole = 0;
+        int numer = 0;
+        int denom = 1;
+        
+        
+        //Parses as a mixed number if "_" exists
+        if (input.indexOf('_') >= 0)
+        {
+        	whole = Integer.parseInt(input.substring(0, input.indexOf('_')));
+        	numer = Integer.parseInt(input.substring(input.indexOf('_') + 1, input.indexOf('/')));
+        	denom = Integer.parseInt(input.substring(input.indexOf('/') + 1));
+        }
+        /*
+         * Parses as a fraction if "/" exists
+         * and does not contain "_"
+         */
+        else if (input.indexOf('/') >= 0)
+        {
+        	numer = Integer.parseInt(input.substring(0, input.indexOf('/')));
+        	denom = Integer.parseInt(input.substring(input.indexOf('/') + 1));
+        }
+        /*
+         * Parses as a whole number if neither
+         * "_" nor "/" exist
+         */
+        else
+        	whole = Integer.parseInt(input);
+        
+        //Initializes return array with the parse results
+        Fraction frac = new Fraction(whole, numer, denom);
+        
+        //Returns array
+        return frac;
     }
 
     // TODO: Fill in the space below with any helper methods that you think you will need

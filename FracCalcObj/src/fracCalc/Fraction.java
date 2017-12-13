@@ -25,6 +25,9 @@ public class Fraction {
     	
     	return input;
 	}
+	public int getDenom() {
+		return denom;
+	}
 	public Fraction add(Fraction frac) {
 		int resultNumer;
         int resultDenom;
