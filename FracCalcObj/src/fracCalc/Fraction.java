@@ -1,14 +1,28 @@
 package fracCalc;
 
+/**
+ * @author Eric Xiao
+ * @date 12/19/2017
+ * @class APCS 2
+ * @description
+ * Allows FracCalc to create objects to represent
+ * mixed numbers
+ */
 public class Fraction {
+	//Defining fields
 	private int whole;
 	private int numer;
 	private int denom;
+	//Constructor initializes fields
 	public Fraction(int whole, int numer, int denom) {
 		this.whole = whole;
 		this.numer = numer;
 		this.denom = denom;
 	}
+	/*
+	 * Converts Fraction object to a String; eliminates
+	 * extraneous elements
+	 */
 	public String toString() {
 		String input = whole + "_" + numer + "/" + denom;
 
@@ -25,9 +39,11 @@ public class Fraction {
     	
     	return input;
 	}
+	//Returns the denominator of the fraction
 	public int getDenom() {
 		return denom;
 	}
+	//Adds Fraction object to this Fraction object
 	public Fraction add(Fraction frac) {
 		int resultNumer;
         int resultDenom;
@@ -45,6 +61,7 @@ public class Fraction {
 		Fraction result = new Fraction(0, resultNumer, resultDenom);
 		return result;
 	}
+	//Subtracts this Fraction object by another Fraction object
 	public Fraction subtract(Fraction frac) {
 		int resultNumer;
         int resultDenom;
@@ -62,6 +79,7 @@ public class Fraction {
 		Fraction result = new Fraction(0, resultNumer, resultDenom);
 		return result;
 	}
+	//Multiplies this Fraction object by another Fraction object
 	public Fraction multiply(Fraction frac) {
 		int resultNumer;
         int resultDenom;
@@ -79,6 +97,7 @@ public class Fraction {
 		Fraction result = new Fraction(0, resultNumer, resultDenom);
 		return result;
 	}
+	//Divides this Fraction object by another Fraction object
 	public Fraction divide(Fraction frac) {
 		int resultNumer;
         int resultDenom;
@@ -94,6 +113,7 @@ public class Fraction {
 		Fraction result = new Fraction(0, resultNumer, resultDenom);
 		return result;
 	}
+	//Simplifies this Fraction object
 	public void reduce() {
 		if (denom < 0)
     	{
